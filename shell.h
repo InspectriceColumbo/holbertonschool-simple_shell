@@ -8,7 +8,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stddef.h>
-#include "shell.h"
 
 void _puts(char *str);
 int _strlen(char *s);

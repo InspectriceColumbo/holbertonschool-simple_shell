@@ -14,9 +14,9 @@ void sig_handler(int sig_num)
 }
 
 /**
-* _EOF - handles the End of File
-* @len: return value of getline function
-* @buff: buffer
+ * _EOF - handles the End of File
+ * @len: return value of getline function
+ * @buff: buffer
  */
 
 void _EOF(int len, char *buff)
@@ -32,17 +32,19 @@ void _EOF(int len, char *buff)
 		exit(0);
 	}
 }
+
 /**
-  * _isatty - verif if terminal
-  */
+ * _isatty - verif if terminal
+ */
 
 void _isatty(void)
 {
 	if (isatty(STDIN_FILENO))
 		_puts("cisfun ");
 }
+
 /**
- * main - Shell
+ * main - core shell
  * Return: 0 on success
  */
 
@@ -50,7 +52,7 @@ int main(void)
 {
 	ssize_t len = 0;
 	char *buff = NULL,
-	char *value, *pathname, **arv;
+	     char *value, *pathname, **arv;
 	size_t size = 0;
 	list_path *head = '\0';
 	void (*f)(char **);

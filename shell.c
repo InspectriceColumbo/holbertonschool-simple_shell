@@ -9,7 +9,7 @@ void sig_handler(int sig_num)
 {
 	if (sig_num == SIGINT)
 	{
-		_puts("\ncisfun ");
+		_puts("\ncisfun$ ");
 	}
 }
 
@@ -51,8 +51,8 @@ void _isatty(void)
 int main(void)
 {
 	ssize_t len = 0;
-	char *buff = NULL,
-	     char *value, *pathname, **arv;
+	char *buff = NULL;
+	char *value, *pathname, **arv;
 	size_t size = 0;
 	list_path *head = '\0';
 	void (*f)(char **);

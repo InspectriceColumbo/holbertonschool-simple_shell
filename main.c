@@ -5,11 +5,17 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+void display_prompt(void)
+{
+	printf("\ncisfun$ ");
+}
+
 /**
  * main - Entry point of the shell program.
  *
  * Return: Always 0 (Success).
  */
+
 int main(void)
 {
 	char *line;

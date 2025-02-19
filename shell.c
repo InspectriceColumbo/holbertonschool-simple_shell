@@ -34,16 +34,6 @@ void _EOF(int len, char *buff)
 }
 
 /**
- * _isatty - verif if terminal
- */
-
-void _isatty(void)
-{
-	if (isatty(STDIN_FILENO))
-		_puts("cisfun ");
-}
-
-/**
  * main - core shell
  * Return: 0 on success
  */
@@ -60,7 +50,7 @@ int main(void)
 	signal(SIGINT, sig_handler);
 	while (len != EOF)
 	{
-		_isatty();
+		display_prompt();
 		len = getline(&buff, &size, stdin);
 		_EOF(len, buff);
 		arv = splitstring(buff, " \n");

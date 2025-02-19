@@ -13,9 +13,9 @@
 
 int main(void)
 {
-	char *line;
-	char **argv;
-	int status;
+	char *line; /* string - user's command input */
+	char **argv; /* not used atm, will store split command arguments */
+	int status; /* stores the status code returned by exec the command */
 
 	while (1)
 	{

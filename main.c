@@ -5,15 +5,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-void display_prompt(void)
-{
-	printf("\ncisfun$ ");
-}
-
 /**
- * main - Entry point of the shell program.
+ * main - Entry point of our shell program
  *
- * Return: Always 0 (Success).
+ * Return: Always 0 (success).
  */
 
 int main(void)
@@ -27,6 +22,7 @@ int main(void)
 		display_prompt();
 
 		line = read_command();
+		
 		if (line == NULL)
 		{
 			free(line);
@@ -47,10 +43,9 @@ int main(void)
 		{
 			fprintf(stderr, "%s: Command execution failure\n", argv[0]);
 		}
-
+		
 		free(argv);
 		free(line);
 	}
-
 	return (0);
 }

@@ -27,7 +27,7 @@ int execute_command(char *line)
 
 		if (execvp(args[0], args) == -1)
 		{
-			perror(line);
+			perror("execvp failure");
 			exit(1);
 		}
 	}

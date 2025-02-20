@@ -61,12 +61,12 @@ char *read_command(void)
 
 	if (getline(&line, &size, stdin) == -1)
 	{
-		return NULL;
+		return (NULL);
 	}
 
 	line[strcspn(line, "\n")] = '\0';
 
-	return line;
+	return (line);
 }
 
 #include "shell.h"
@@ -115,7 +115,7 @@ int execute_command(char *line)
 	if (pid == -1)
 	{
 		perror("fork");
-		return 1;
+		return (1);
 	}
 	else if (pid == 0)
 	{
@@ -130,5 +130,5 @@ int execute_command(char *line)
 		waitpid(pid, &status, 0);
 	}
 
-	return 0;
+	return (0);
 }

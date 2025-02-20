@@ -39,10 +39,9 @@ int main(void)
 
 		if (status == 0)
 		{
-			fprintf(stderr, "%s: Command execution failure\n", argv[0]); // test juste line sans argv donc need to remove argv et 0  
+			fprintf(stderr, "%s: Command execution failure\n", line);
 		}
 
-		free(argv);
 		free(line);
 	}
 	return (0);

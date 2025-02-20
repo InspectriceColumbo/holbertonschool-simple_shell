@@ -5,7 +5,6 @@
  * Result is stored in @line
  * Return: line
  */
-
 char *read_command(void)
 {
 	size_t size = 0;

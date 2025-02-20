@@ -20,15 +20,22 @@ int execute_command(char *line)
 
 	else if (pid == 0)
 	{
-		if (execvp(line, NULL) == -1) 
+		char *args[2];
+
+		args[0] = line;
+		args[1] = NULL;
+
+		if (execvp(args[0], args) == -1)
 		{
 			perror(line);
 			exit(1);
 		}
 	}
-	else 
+
+	else
 	{
 		waitpid(pid, &status, 0);
 	}
+
 	return (0);
 }

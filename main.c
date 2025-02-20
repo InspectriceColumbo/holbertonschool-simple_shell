@@ -22,7 +22,7 @@ int main(void)
 		display_prompt();
 
 		line = read_command();
-		
+
 		if (line == NULL)
 		{
 			free(line);
@@ -35,15 +35,13 @@ int main(void)
 			continue;
 		}
 
-		argv = split_command(line);
-
-		status = execute_command(argv);
+		status = execute_command(line);
 
 		if (status == 0)
 		{
-			fprintf(stderr, "%s: Command execution failure\n", argv[0]);
+			fprintf(stderr, "%s: Command execution failure\n", argv[0]); // test juste line sans argv donc need to remove argv et 0  
 		}
-		
+
 		free(argv);
 		free(line);
 	}

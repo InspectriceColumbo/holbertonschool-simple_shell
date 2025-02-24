@@ -10,22 +10,19 @@
  *
  * Return: Always 0 (success).
  */
-
 int main(void)
 {
 	char *line;
 	int status;
-
 	char *path = getenv("PATH");
+
+	if (path != NULL)
 	{
-		if (path != NULL)
-		{
-			printf("PATH: %s\n", path);
-		}
-		else
-		{
-			printf("PATH environment var is not set.\n");
-		}
+		printf("PATH: %s\n", path);
+	}
+	else
+	{
+		printf("PATH environment var is not set.\n");
 	}
 
 	while (1)
@@ -41,20 +38,17 @@ int main(void)
 		}
 
 		line[strcspn(line, "\n")] = 0; /*strip newline char if present */
-
 		if (strlen(line) == 0)
 		{
 			free(line);
 			continue;
 		}
-
 		status = execute_command(line);
 
-		if (status == 0)
+		if (status == -1)
 		{
 			fprintf(stderr, "%s: Command execution failure\n", line);
 		}
-
 		free(line);
 	}
 	return (0);

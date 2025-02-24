@@ -5,17 +5,23 @@
  * Result is stored in @line
  * Return: line
  */
+
 char *read_command(void)
 {
-	size_t size = 0;
-	char *line = NULL;
+	size_t bsize = 1024; /* buffer size */
+	char *line = malloc(bsize);
 
-	if (getline(&line, &size, stdin) == -1)
+	if (line == NULL)
 	{
-		return (NULL);
+		perror("malloc");
+		exit(1);
 	}
 
-	line[strcspn(line, "\n")] = '\0';
+	if (fgets(line, bsize, stdin) == NULL)
+	{
+		free(line);
+		return (NULL);
+	}
 
 	return (line);
 }

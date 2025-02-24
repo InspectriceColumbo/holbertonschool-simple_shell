@@ -13,8 +13,20 @@
 
 int main(void)
 {
-	char *line; /* string - user's command input */
-	int status; /* stores the status code returned by exec the command */
+	char *line;
+	int status;
+
+	char *path = getenv("PATH");
+	{
+		if (path != NULL)
+		{
+			printf("PATH: %s\n", path);
+		}
+		else
+		{
+			printf("PATH environment var is not set.\n");
+		}
+	}
 
 	while (1)
 	{

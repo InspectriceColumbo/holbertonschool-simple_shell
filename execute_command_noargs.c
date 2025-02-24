@@ -3,38 +3,46 @@
 /**
  * execute_command - Function that executes and forks a command.
  * @line: input line
- * Return: 1 if success and 0 if failure
+ * Return: 0 if success and -1 if failure
  */
 
 int execute_command(char *line)
 {
 	pid_t pid;
 	int status;
+	char *args[100];/* array holding command and potential args*/
 
-	pid = fork();
+	char *token = strtok(line, " ");
+	int i = 0;
+
+	while (token != NULL)
+	{
+		args[i] = token;
+		token = strtok(NULL, " ");
+		i++;
+	}
+
+	args[i] = NULL; /* nullterminating the args list */
+
+	pid = fork();/* child process creation */
 	if (pid == -1)
 	{
 		perror("fork");
-		return (1);
+		return (-1);
 	}
 
-	else if (pid == 0)
+	if (pid == 0)/* child process */
 	{
-		char *args[2];
-
-		args[0] = line;
-		args[1] = NULL;
-
-		if (execvp(args[0], args) == -1)
+		if (execve(args[0], args, environ) == -1)
 		{
-			perror("execvp failure");
+			perror("execve has failed");
 			exit(1);
 		}
 	}
 
-	else
+	else/* parent process */
 	{
-		waitpid(pid, &status, 0);
+		wait(&status);
 	}
 
 	return (0);

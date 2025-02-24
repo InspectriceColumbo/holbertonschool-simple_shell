@@ -9,6 +9,8 @@
 #include <sys/wait.h>
 #include <stddef.h>
 
+extern char **environ;/* global environment variable*/
+
 void _puts(char *str);
 int _strlen(char *s);
 char *_strdup(char *str);

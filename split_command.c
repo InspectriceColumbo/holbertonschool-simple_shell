@@ -19,7 +19,7 @@ char **split_command(char *line)
 	if (!argv)
 	{
 		perror("malloc failed");
-		exit(1);
+		return (NULL);/*memory alloc failure*/
 	}
 
 	if (line == NULL || strlen(line) == 0)

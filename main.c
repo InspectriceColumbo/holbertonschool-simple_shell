@@ -14,37 +14,24 @@ int main(void)
 {
 	char *line;
 	int status;
-	char *path = getenv("PATH");
 
-	if (path != NULL)
-	{
-		printf("PATH: %s\n", path);
-	}
-	else
-	{
-		printf("PATH environment var is not set.\n");
-	}
-
-	while (1)
+	while (1)/*main shell loop*/
 	{
 		display_prompt();
 
-		line = read_command();
-
+		line = read_command();/*read user input*/
 		if (line == NULL)
 		{
-			free(line);
-			break;
+			break;/*EOF/error, exit the shell */
 		}
 
-		line[strcspn(line, "\n")] = 0; /*strip newline char if present */
 		if (strlen(line) == 0)
 		{
-			free(line);
+			free(line);/* ignore empty input */
 			continue;
 		}
-		status = execute_command(line);
 
+		status = execute_command(line);/*execute command*/
 		if (status == -1)
 		{
 			fprintf(stderr, "%s: Command execution failure\n", line);

@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * display_prompt - function that displays our basic prompt
+ * display_prompt - function that displays our prompt if stdin is a terminal
  * Return: nothing (void)
  */
 

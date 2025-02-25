@@ -10,39 +10,34 @@ int execute_command(char *line)
 {
 	pid_t pid;
 	int status;
-	char *args[100];/* array holding command and potential args*/
+	char *args[2];/*array to hold command + NULL for execve */
 
-	char *token = strtok(line, " ");
-	int i = 0;
+	line[strcspn(line, "\n")] = 0;/*strip newline char if present*/
 
-	while (token != NULL)
-	{
-		args[i] = token;
-		token = strtok(NULL, " ");
-		i++;
-	}
-
-	args[i] = NULL; /* nullterminating the args list */
+	/* Preparing the args for execve */
+	args[0] = line;
+	args[1] = NULL;
 
 	pid = fork();/* child process creation */
+
 	if (pid == -1)
 	{
-		perror("fork");
+		perror("fork");/* forking has failed */
 		return (-1);
 	}
 
 	if (pid == 0)/* child process */
 	{
-		if (execve(args[0], args, environ) == -1)
+		if (execve(line, args, environ) == -1)/*if execve fails print an error*/
 		{
-			perror("execve has failed");
-			exit(1);
+			perror(line);
+			exit(1);/*Exit child process*/
 		}
 	}
 
 	else/* parent process */
 	{
-		wait(&status);
+		wait(&status);/* wait for child process to finish*/
 	}
 
 	return (0);

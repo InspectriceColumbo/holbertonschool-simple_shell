@@ -14,6 +14,7 @@ char *read_command(void)
 	/*Read the command from stdin */
 	if (getline(&line, &bsize, stdin) == -1)
 	{
+		perror("Error reading input");
 		free(line);/* End of file condition (Ctrl+D) or error */
 		return (NULL);
 	}

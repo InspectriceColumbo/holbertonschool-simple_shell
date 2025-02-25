@@ -8,16 +8,10 @@
 
 char *read_command(void)
 {
-	size_t bsize = 1024; /* buffer size */
-	char *line = malloc(bsize);
+	size_t bsize = 0; /* getline will dinamically allocate memory */
+	char *line = NULL;
 
-	if (line == NULL)
-	{
-		perror("malloc");
-		exit(1);
-	}
-
-	if (fgets(line, bsize, stdin) == NULL)
+	if (getline(&line, &bsize, stdin) == -1)
 	{
 		free(line);
 		return (NULL);

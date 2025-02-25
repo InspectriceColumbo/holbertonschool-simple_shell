@@ -28,8 +28,8 @@ int execute_command(char *line)
 	{
 		if (execve(line, args, environ) == -1)/*if execve fails print an error*/
 		{
-			perror(line);
-			exit(1);/*Exit child process*/
+			perror("Command execution has failed");
+			return (-1);/*failure code instead of exiting*/
 		}
 	}
 

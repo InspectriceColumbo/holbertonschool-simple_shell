@@ -18,7 +18,7 @@ char *concat_all(char *name, char *sep, char *value);
 void display_prompt(void);
 char *read_command(void);
 char **split_command(char *line);
-int execute_command(char *line);
+int execute_command(char **argv);
 char **splitstring(char *str, const char *delim);
 void execute(char **argv);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);

@@ -25,10 +25,12 @@ int main(void)
 			break;/*EOF/error, exit the shell */
 		}
 
-		if (strlen(line) == 0)
+		line[strcspn(line, "\n")] = 0;/*strip newline char if present*/
+
+		if (strlen(line) == 0)/*if empty input(no command typed*/
 		{
 			free(line);/* ignore empty input */
-			continue;
+			continue;/*skip to the next iteration */
 		}
 
 		status = execute_command(line);/*execute command*/
@@ -36,7 +38,7 @@ int main(void)
 		{
 			fprintf(stderr, "%s: Command execution failure\n", line);
 		}
-		free(line);
+		free(line);/* free memory allocated for input line*/
 	}
 	return (0);
 }

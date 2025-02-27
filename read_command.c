@@ -22,10 +22,9 @@ char *read_command(void)
 		{
 			perror("Error reading input");
 			free(line);
-			return (NULL);/* return NULL or error */
+			return (NULL);/* return NULL on error */
 		}
 	}
 
-	return (line);
-
+	return (line);/* return the command if no error */
 }

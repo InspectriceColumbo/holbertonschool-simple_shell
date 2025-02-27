@@ -10,8 +10,6 @@ char *read_command(void)
 {
 	size_t bsize = 0; /* getline will dinamically allocate memory */
 	char *line = NULL;
-	ssize_t len;
-
 	ssize_t len = getline(&line, &bsize, stdin);/* read command from stdin */
 
 	if (len == -1)/* EOF or error */

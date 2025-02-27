@@ -9,7 +9,7 @@
  * main - Entry point of our shell program
  *
  * Return: Always 0 (success).
- */
+*/
 
 int main(void)
 {
@@ -24,16 +24,19 @@ int main(void)
 		{
 			display_prompt();
 		}
-
 		line = read_command();/*read user input*/
 
-		if (line == NULL)/* EOF or error */
+		if (line == NULL)/*Checking for EOF or error */
 		{
-			break;/*EOF/error, exit the shell */
+			if (isatty(STDIN_FILENO))
+			{
+				printf("\nEOF received, shell exit\n");
+			}
+			free(line);
+			break;/*Exit the loop on EOF/error*/
 		}
 
 		line[strcspn(line, "\n")] = 0;/*strip newline char if present*/
-
 		if (strlen(line) == 0)/*if empty input(no command typed*/
 		{
 			free(line);/* ignore empty input */

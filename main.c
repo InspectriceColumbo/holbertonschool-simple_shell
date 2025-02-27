@@ -24,7 +24,7 @@ int main(void)
 
 		line = read_command();/*read user input*/
 
-		if (line == NULL)
+		if (line == NULL)/* EOF or error */
 		{
 			free(line);
 			break;/*EOF/error, exit the shell */

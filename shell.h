@@ -16,6 +16,7 @@ int _strlen(char *s);
 char *_strdup(char *str);
 char *concat_all(char *name, char *sep, char *value);
 void display_prompt(void);
+void sig_handler(int sig_num);
 char *read_command(void);
 char **split_command(char *line);
 int execute_command(char *line);

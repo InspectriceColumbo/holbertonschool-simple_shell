@@ -26,7 +26,6 @@ int main(void)
 
 		if (line == NULL)/* EOF or error */
 		{
-			free(line);
 			break;/*EOF/error, exit the shell */
 		}
 

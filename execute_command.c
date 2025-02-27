@@ -28,7 +28,7 @@ int execute_command(char *line)
 	{
 		if (execve(line, args, environ) == -1)/*if execve fails print an error*/
 		{
-			perror("execve failure");
+			fprintf(stderr, "%s: Command not found\n", line);
 			return (-1);/*failure code instead of exiting*/
 		}
 	}

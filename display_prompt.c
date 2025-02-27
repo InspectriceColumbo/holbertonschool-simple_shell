@@ -9,7 +9,7 @@ void display_prompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		printf("c$");
+		printf("(c$) ");
 		fflush(stdout);
 	}
 }

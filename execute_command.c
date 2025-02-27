@@ -28,7 +28,7 @@ int execute_command(char *line)
 	{
 		if (execve(line, args, environ) == -1)/*if execve fails print an error*/
 		{
-			perror("Command execution has failed");
+			perror("execve failure");
 			return (-1);/*failure code instead of exiting*/
 		}
 	}

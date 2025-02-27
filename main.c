@@ -10,6 +10,7 @@
  *
  * Return: Always 0 (success).
  */
+
 int main(void)
 {
 	char *line;
@@ -20,8 +21,10 @@ int main(void)
 		display_prompt();
 
 		line = read_command();/*read user input*/
+
 		if (line == NULL)
 		{
+			free(line);
 			break;/*EOF/error, exit the shell */
 		}
 
@@ -34,6 +37,7 @@ int main(void)
 		}
 
 		status = execute_command(line);/*execute command*/
+
 		if (status == -1)
 		{
 			fprintf(stderr, "%s: Command execution failure\n", line);

@@ -10,6 +10,6 @@ void sig_handler(int sig_num)
 {
 	if (sig_num == SIGINT)
 	{
-		write(STDOUT_FILENO, "\nc$ ", 4);  /* Prints prompt after Ctrl+C */
+		write(STDOUT_FILENO, "\n(c$) ", 6);  /* Prints prompt after Ctrl+C */
 	}
 }

@@ -20,7 +20,10 @@ char *read_command(void)
 		}
 		else
 		{
-			perror("Error reading input");
+			if (isatty(STDIN_FILENO))/*only print error if stdin is interactive*/
+			{
+				perror("Error reading input");
+			}
 			free(line);
 			return (NULL);/* return NULL on error */
 		}

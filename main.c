@@ -20,7 +20,10 @@ int main(void)
 
 	while (1)/*main shell loop*/
 	{
-		display_prompt();
+		if (isatty(STDIN_FILENO))/* only display prompt if interactive mode */
+		{
+			display_prompt();
+		}
 
 		line = read_command();/*read user input*/
 

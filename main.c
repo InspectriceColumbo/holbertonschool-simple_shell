@@ -16,6 +16,8 @@ int main(void)
 	char *line;
 	int status;
 
+	signal(SIGINT, sig_handler);/* signal handler for ctrl+c*/
+
 	while (1)/*main shell loop*/
 	{
 		display_prompt();

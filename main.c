@@ -14,7 +14,6 @@
 int main(void)
 {
 	char *line;
-	int status;
 
 	signal(SIGINT, sig_handler);/* signal handler for ctrl+c*/
 
@@ -43,12 +42,8 @@ int main(void)
 			continue;/*skip to the next iteration */
 		}
 
-		status = execute_command(line);/*execute command*/
+		execute_command(line);/*execute command*/
 
-		if (status == -1)
-		{
-			fprintf(stderr, "%s: Command execution failure\n", line);
-		}
 		free(line);/* free memory allocated for input line*/
 	}
 	return (0);

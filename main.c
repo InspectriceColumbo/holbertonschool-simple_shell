@@ -27,12 +27,8 @@ int main(void)
 
 		if (line == NULL)/*Checking for EOF or error */
 		{
-			if (isatty(STDIN_FILENO))
-			{
-				printf("\nEOF received, shell exit\n");
-			}
 			free(line);
-			break;/*Exit the loop on EOF/error*/
+			break;/*Exit the shell on EOF*/
 		}
 
 		line[strcspn(line, "\n")] = 0;/*strip newline char if present*/

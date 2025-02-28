@@ -20,9 +20,9 @@ char *read_command(void)
 		}
 		else
 		{
-			if (isatty(STDIN_FILENO))/*only print error if stdin is interactive*/
+			if (isatty(STDIN_FILENO))/* if interactive mode */
 			{
-				perror("Error reading input");
+				printf("\n");
 			}
 			free(line);
 			return (NULL);/* return NULL on error */

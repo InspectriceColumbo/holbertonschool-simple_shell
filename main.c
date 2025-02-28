@@ -30,6 +30,7 @@ int main(void)
 			free(line);
 			break;/*Exit the shell on EOF*/
 		}
+		line = trim_spaces(line);/* trims whitespaces before and after*/
 
 		line[strcspn(line, "\n")] = 0;/*strip newline char if present*/
 		if (strlen(line) == 0)/*if empty input(no command typed*/

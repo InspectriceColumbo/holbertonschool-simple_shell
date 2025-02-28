@@ -28,7 +28,7 @@ int execute_command(char *line)
 	{
 		if (execve(line, args, environ) == -1)/*if execve fails print an error*/
 		{
-			fprintf(stderr, "%s: No such file or directory\n", line);
+			fprintf(stderr, "./hsh: %s: No such file or directory\n", line);
 			return (-1);/*failure code instead of exiting*/
 		}
 	}

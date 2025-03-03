@@ -2,19 +2,19 @@
 
 /**
  * execute_command - Function that executes and forks a command.
- * @line: input line
+ * @argv: input args (command and args)
  * Return: 0 if success and -1 if failure
  */
 
-int execute_command(char *line)
+int execute_command(char **argv)
 {
 	pid_t pid;
 	int status;
-	char *argv[2];/*array to hold command + NULL for execve */
 
-	/* Preparing the args for execve */
-	argv[0] = line;
-	argv[1] = NULL;
+	if (argv == NULL || argv[0] == NULL)
+	{
+		return (-1);
+	}
 
 	pid = fork();/* child process creation */
 
@@ -26,9 +26,9 @@ int execute_command(char *line)
 
 	if (pid == 0)/* child process */
 	{
-		if (execve(line, argv, environ) == -1)/*if execve fails print an error*/
+		if (execve(args[0], argv, environ) == -1)/*if execve fails print an error*/
 		{
-			fprintf(stderr, "./hsh: %s: No such file or directory\n", line);
+			fprintf(stderr, "./hsh: %s: No such file or directory\n", argv[0]);
 			return (-1);/*failure code instead of exiting*/
 		}
 	}

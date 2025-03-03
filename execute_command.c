@@ -10,11 +10,11 @@ int execute_command(char *line)
 {
 	pid_t pid;
 	int status;
-	char *args[2];/*array to hold command + NULL for execve */
+	char *argv[2];/*array to hold command + NULL for execve */
 
 	/* Preparing the args for execve */
-	args[0] = line;
-	args[1] = NULL;
+	argv[0] = line;
+	argv[1] = NULL;
 
 	pid = fork();/* child process creation */
 
@@ -26,7 +26,7 @@ int execute_command(char *line)
 
 	if (pid == 0)/* child process */
 	{
-		if (execve(line, args, environ) == -1)/*if execve fails print an error*/
+		if (execve(line, argv, environ) == -1)/*if execve fails print an error*/
 		{
 			fprintf(stderr, "./hsh: %s: No such file or directory\n", line);
 			return (-1);/*failure code instead of exiting*/

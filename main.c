@@ -10,11 +10,13 @@
  * main - Entry point of our shell program
  *
  * Return: Always 0 (success).
-*/
+ */
 
 int main(void)
 {
 	char *line;
+	char **argv; /*ptr for arguments */
+	int status;
 
 	signal(SIGINT, sig_handler);/* signal handler for ctrl+c*/
 
@@ -24,6 +26,7 @@ int main(void)
 		{
 			display_prompt();
 		}
+
 		line = read_command();/*read user input*/
 
 		if (line == NULL)/*Checking for EOF or error */
@@ -33,15 +36,20 @@ int main(void)
 		}
 
 		line[strcspn(line, "\n")] = 0;/*strip newline char if present*/
+
 		if (strlen(line) == 0)/*if empty input(no command typed*/
 		{
 			free(line);/* ignore empty input */
 			continue;/*skip to the next iteration */
 		}
 
-		execute_command(line);/*execute command*/
+		argv = split_command(line);/* splits command line into args*/
 
+		status = execute_command(argv);/*execute command using argv*/
+
+		free(argv);/* free memory allocated for agrs*/
 		free(line);/* free memory allocated for input line*/
 	}
+
 	return (0);
 }

@@ -15,8 +15,7 @@
 int main(void)
 {
 	char *line;
-	char **argv; /*ptr for arguments */
-	int status;
+	char **argv;
 
 	signal(SIGINT, sig_handler);/* signal handler for ctrl+c*/
 
@@ -45,7 +44,7 @@ int main(void)
 
 		argv = split_command(line);/* splits command line into args*/
 
-		status = execute_command(argv);/*execute command using argv*/
+		execute_command(argv);/*execute command using argv*/
 
 		free(argv);/* free memory allocated for agrs*/
 		free(line);/* free memory allocated for input line*/

@@ -35,18 +35,8 @@ char **split_command(char *line)
 		argv[i] = token;
 		token = strtok(NULL, " ");
 		i++;
-
-		if (i >= 64)/* if array size not enough dynamically resize it*/
-		{
-			argv = _realloc(argv, sizeof(char *) * (i + 1));
-
-			if (!argv)/* check if realloc failed (returned NULL)*/
-			{
-				perror("realloc failed");
-				exit(1);
-			}
-		}
 	}
+
 	argv[i] = NULL;
 
 	return (argv);

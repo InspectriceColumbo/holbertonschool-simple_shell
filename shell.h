@@ -20,8 +20,13 @@ void sig_handler(int sig_num);
 char *read_command(void);
 char **split_command(char *line);
 int execute_command(char *line);
+int execute_command(char **argv);
 char **splitstring(char *str, const char *delim);
 void execute(char **argv);
+char **split_command(char *line);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char *is_command_there(char *command);
+void exit_builtin(void);
+void env_builtin(void);
 
 #endif

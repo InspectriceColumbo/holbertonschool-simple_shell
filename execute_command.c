@@ -26,7 +26,7 @@ int execute_command(char **argv)
 
 	if (pid == 0)/* child process */
 	{
-		if (execve(args[0], argv, environ) == -1)/*if execve fails print an error*/
+		if (execve(argv[0], argv, environ) == -1)/*if execve fails print an error*/
 		{
 			fprintf(stderr, "./hsh: %s: No such file or directory\n", argv[0]);
 			return (-1);/*failure code instead of exiting*/

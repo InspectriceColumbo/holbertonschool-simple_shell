@@ -16,8 +16,10 @@ int execute_command(char **argv)
 	{
 		return (-1);
 	}
+
 	command_path = is_command_there(argv[0]);/* checks if command exists*/
 	/*by calling is_command_there*/
+
 	if (command_path == NULL)/*if command doesnt exist*/
 	{
 		fprintf(stderr, "./hsh: %s: No such file or directory\n", argv[0]);
@@ -25,6 +27,7 @@ int execute_command(char **argv)
 	}
 	/* if command exists proceed w forking */
 	pid = fork();/* child process creation */
+
 	if (pid == -1)
 	{
 		perror("fork");/* forking has failed */
@@ -35,7 +38,7 @@ int execute_command(char **argv)
 	{/* Use command path found by is_command_there */
 		if (execve(command_path, argv, environ) == -1)
 		{
-			fprintf(stderr, "./hsh: %s: No such file or directory\n", command_path);
+			fprintf(stderr, "./hsh: %s: Execution failure\n", command_path);
 			return (-1);/*failure code instead of exiting*/
 		}
 	}

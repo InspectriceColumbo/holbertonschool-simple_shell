@@ -23,8 +23,11 @@ char *is_command_there(char *command)
 	if (command == NULL || path == NULL)
 		return (NULL);
 
+	printf("Checking command: %s\n", command);/* debugging check*/
+	printf("PATH: %s\n", path);
+
 	if (command[0] == '/' || command[0] == '.')/* if command has slash */
-/* it is absolute, if ./ it is relative, in both cases don't check PATH */
+		/* it is absolute, if ./ it is relative, in both cases don't check PATH */
 	{
 		if (stat(command, &fileinfo) == 0)/* checks if file exist*/
 			return (command);/* if so returns the command*/
@@ -32,7 +35,6 @@ char *is_command_there(char *command)
 			return (NULL);/* return NULL if command doesnt exist */
 	}
 	directory = strtok(path, ":");/*split PATH by ":" and check each dir*/
-
 	while (directory != NULL)
 	{
 		fullpath = malloc(strlen(directory) + strlen(command) + 2);/*for '/' & '\0'*/
@@ -43,12 +45,12 @@ char *is_command_there(char *command)
 			exit(1);
 		}
 		sprintf(fullpath, "%s/%s", directory, command);/*create full path 2 command*/
+		printf("Checking: %s\n", fullpath);/* debugging check*/
 
 		if (stat(fullpath, &fileinfo) == 0)/* checks if command exists in dir*/
 		{
-			return (fullpath);/* command found*/
+			return (fullpath);/* command found, return full path*/
 		}
-
 		free(fullpath);/* free memory and try next directory*/
 		directory = strtok(NULL, ":");
 	}

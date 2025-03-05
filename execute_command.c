@@ -21,30 +21,31 @@ int execute_command(char **argv)
 		return (0);
 	}
 	command_path = is_command_there(argv[0]);/* checks if command exists*/
+
+	if (command_path == NULL)/*if command doesnt exist*/
+	{
+		fprintf(stderr, "./hsh: %s: No such file or directory\n", argv[0]);
+		return (-1);/* do not fork*/
+	}
 	pid = fork();/* child process creation */
+
 	if (pid == -1)
 	{
 		perror("fork");/* forking has failed */
 		exit(EXIT_FAILURE);
 	}
 
-	else if (pid == 0)
+	if (pid == 0)/* child process */
 	{
-		if (command_path == NULL)/*if command doesnt exist*/
+		if (execve(command_path, argv, environ) == -1)
 		{
-			fprintf(stderr, "./hsh: %s: No such file or directory\n", argv[0]);
-			exit(EXIT_FAILURE);/* do not fork*/
-		}
-		argv[0] = command_path;
-		if (execve(argv[0], argv, environ) == -1)
-		{
-			perror(argv[0]);
+			fprintf(stderr, "./hsh: %s: Execution failure\n", command_path);
 			exit(EXIT_FAILURE);
 		}
 	}
-	else
+	else/* parent process */
 	{
-		waitpid(pid, &status, 0);/* wait for child process to finish*/
+		wait(&status);/* wait for child process to finish*/
 	}
 	return (0);
 }

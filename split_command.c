@@ -13,7 +13,6 @@ char **split_command(char *line)
 	char **argv;
 	char *token;
 	int i = 0;
-	int j;
 
 	argv = malloc(sizeof(char *) * 64);/* memory allocation for the args array */
 
@@ -37,16 +36,5 @@ char **split_command(char *line)
 	}
 	argv[i] = NULL;
 
-	if (i > 0)/* debugging: check to confirm command and args */
-	{
-		printf("Command: %s\n", argv[0]);
-
-		for (j = 1; j < i; j++)
-		{
-			printf("Argument %d: %s\n", j, argv[j]);
-		}
-	}
-	else
-		printf("No command entered.\n");
 	return (argv);
 }

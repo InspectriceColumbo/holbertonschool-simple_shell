@@ -25,7 +25,7 @@ int execute_command(char **argv)
 	if (command_path == NULL)/*if command doesnt exist*/
 	{
 		fprintf(stderr, "./hsh: %s: No such file or directory\n", argv[0]);
-		return (-1);/* do not fork*/
+		return (-1);/*command doesnt exist, so do not fork*/
 	}
 	pid = fork();/* child process creation */
 

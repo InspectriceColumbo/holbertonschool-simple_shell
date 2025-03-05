@@ -16,25 +16,24 @@
 char *is_command_there(char *command)
 {
 	char *path = getenv("PATH");
-	char *directory;
-	char *fullpath;
+	char *path_copy, *directory, *fullpath;
 	struct stat fileinfo;
 
-	if (command == NULL || path == NULL)
+	if (path == NULL)
 		return (NULL);
 
-	printf("Checking command: %s\n", command);/* debugging check*/
-	printf("PATH: %s\n", path);
+	path_copy = strdup(path);/*duplicate PATH string to prevent strtok pb*/
 
-	if (command[0] == '/' || command[0] == '.')/* if command has slash */
-		/* it is absolute, if ./ it is relative, in both cases don't check PATH */
+	if (command[0] == '/' || command[0] == '.')/*check for abs/rel path*/
 	{
 		if (stat(command, &fileinfo) == 0)/* checks if file exist*/
 			return (command);/* if so returns the command*/
 		else
 			return (NULL);/* return NULL if command doesnt exist */
 	}
-	directory = strtok(path, ":");/*split PATH by ":" and check each dir*/
+	directory = strtok(path_copy, ":");/*using strtok on copy so that the */
+	/* original PATH string remains intact for future calls */
+
 	while (directory != NULL)
 	{
 		fullpath = malloc(strlen(directory) + strlen(command) + 2);/*for '/' & '\0'*/
@@ -45,14 +44,15 @@ char *is_command_there(char *command)
 			exit(1);
 		}
 		sprintf(fullpath, "%s/%s", directory, command);/*create full path 2 command*/
-		printf("Checking: %s\n", fullpath);/* debugging check*/
 
 		if (stat(fullpath, &fileinfo) == 0)/* checks if command exists in dir*/
 		{
+			free(path_copy);/* frees the copied PATH string before returning*/
 			return (fullpath);/* command found, return full path*/
 		}
 		free(fullpath);/* free memory and try next directory*/
 		directory = strtok(NULL, ":");
 	}
+	free(path_copy);/* frees copied PATH string if no command found*/
 	return (NULL);/* command not found in any directory*/
 }

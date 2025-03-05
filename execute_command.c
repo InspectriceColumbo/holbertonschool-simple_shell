@@ -15,6 +15,11 @@ int execute_command(char **argv)
 	if (argv == NULL || argv[0] == NULL)
 		return (-1);
 
+	if (strcmp(argv[0], "exit") == 0)
+	{/* checks if command is exit and if so exit */
+		exit_builtin();
+		return (0);
+	}
 	command_path = is_command_there(argv[0]);/* checks if command exists*/
 
 	if (command_path == NULL)/*if command doesnt exist*/
@@ -22,7 +27,6 @@ int execute_command(char **argv)
 		fprintf(stderr, "./hsh: %s: No such file or directory\n", argv[0]);
 		return (-1);/* do not fork*/
 	}
-
 	pid = fork();/* child process creation */
 
 	if (pid == -1)
